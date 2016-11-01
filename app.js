@@ -44,7 +44,7 @@ router.route('/Pessoa')
 			if(err){
 				res.send(err);
 			}
-			res.json({message: 'Pessoa cadastrada'})
+			res.json({message: 'Pessoa cadastrada!'})
 		});
 	});
 
@@ -67,7 +67,7 @@ router.route('/Pessoa/:id')
 					if(err){
 						res.send(err)
 					}
-					res.json({message: 'Pessoa atualizada'})
+					res.json({message: 'Pessoa atualizada!'})
 				});
 		});
 	})
@@ -76,7 +76,7 @@ router.route('/Pessoa/:id')
 			if(err){
 				res.send(err);
 			}
-				res.json({message: 'Pessoa excluida'})
+				res.json({message: 'Pessoa excluída!'})
 		})
 	});
 
@@ -101,12 +101,46 @@ router.route('/Animal')
 			if(err){
 				res.send(err);
 			}
-			res.json({message: 'Animal cadastrada'})
+			res.json({message: 'Animal cadastrado!'})
 		});
 	});
 
+	router.route('/Animal/:id')
+	.get(function(req,res){
+		Animal.findById(req.params.id, function(err, dados){
+			if(err){
+				res.send(err);
+			}
+				res.json(dados);
+		});
+	})
+	.put(function(req,res){
+		Animal.findById(req.params.id, function(err, dados){
+			if(err){
+				req.send(err)
+			}
+				dados.nomeAnimal = req.body.nomeAnimal;
+				dados.raca = req.body.raca;
+				dados.idade = req.body.idade;
+				dados.descricao = req.body.descricao;
+				dados.save(function(err){
+					if(err){
+						res.send(err)
+					}
+					res.json({message: 'Animal atualizado!'})
+				});
+		});
+	})
+	.delete(function(req,res){
+		Animal.remove({_id: req.params.id}, function(err, dados){
+			if(err){
+				res.send(err);
+			}
+				res.json({message: 'Dados do animal excluídos!'})
+		})
+	});
 app.use('/api', router);
 
 app.listen(port, function(){
-	console.log('Serrvidor rodando na porta: '+port);
+	console.log('Servidor rodando na porta: '+port);
 });
