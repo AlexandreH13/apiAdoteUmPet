@@ -8,7 +8,7 @@ var express = require("express"),
 //Conexão com mongoDB
 mongoose.connect('mongodb://localhost/api', function(err){
 	if(err){
-		console.log('Erro ao conectar no mongodb'+err);
+		console.log('Erro ao conectar no mongodb' + err);
 	}
 });
 
@@ -37,7 +37,8 @@ router.route('/Pessoa')
 	.post(function(req,res){
 		var pessoas = new Pessoa();
 		pessoas.nomePessoa = req.body.nomePessoa;
-		pessoas.logradouro = req.body.logradouro;
+		pessoas.usuario = req.body.usuario;
+		pessoas.senha = req.body.senha;
 		pessoas.endereco = req.body.endereco;
 		pessoas.contato = req.body.contato;
 		pessoas.save(function(err){
@@ -57,12 +58,17 @@ router.route('/Pessoa/:id')
 				res.json(dados);
 		});
 	})
+
 	.put(function(req,res){
 		Pessoa.findById(req.params.id, function(err, dados){
 			if(err){
 				req.send(err)
 			}
 				dados.nomePessoa = req.body.nomePessoa;
+				dados.usuario = req.body.usuario;
+				dados.senha = req.body.senha;
+				dados.endereco = req.body.endereco;
+				dados.contato = req.body.contato;
 				dados.save(function(err){
 					if(err){
 						res.send(err)
@@ -71,6 +77,7 @@ router.route('/Pessoa/:id')
 				});
 		});
 	})
+
 	.delete(function(req,res){
 		Pessoa.remove({_id: req.params.id}, function(err, dados){
 			if(err){
@@ -114,6 +121,7 @@ router.route('/Animal')
 				res.json(dados);
 		});
 	})
+
 	.put(function(req,res){
 		Animal.findById(req.params.id, function(err, dados){
 			if(err){
@@ -131,6 +139,7 @@ router.route('/Animal')
 				});
 		});
 	})
+
 	.delete(function(req,res){
 		Animal.remove({_id: req.params.id}, function(err, dados){
 			if(err){
@@ -139,8 +148,9 @@ router.route('/Animal')
 				res.json({message: 'Dados do animal excluídos!'})
 		})
 	});
+
 app.use('/api', router);
 
 app.listen(port, function(){
-	console.log('Servidor rodando na porta: '+port);
+	console.log('Servidor rodando na porta: '+ port);
 });

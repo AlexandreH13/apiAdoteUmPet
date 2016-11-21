@@ -3,7 +3,8 @@ var mongoose = require('mongoose'),
 
 var PessoaSchema = new Schema({
 	nomePessoa: {type: String, required: true, trim: true},
-	logradouro: {type: String, required: true, trim: true},
+	usuario: {type: String, required: true, trim: true},
+	senha: {type: String, required: true, trim: true},
 	endereco: {type: String, required: true, trim: true},
 	contato: {type: String, required: true, trim: true}
 });
