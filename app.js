@@ -104,6 +104,8 @@ router.route('/Animal')
 		animais.raca = req.body.raca;
 		animais.idade = req.body.idade;
 		animais.descricao = req.body.descricao;
+		animais.pessoaid = req.body.pessoaid;
+		animais.contato = req.body.contato;
 		animais.save(function(err){
 			if(err){
 				res.send(err);
@@ -131,6 +133,8 @@ router.route('/Animal')
 				dados.raca = req.body.raca;
 				dados.idade = req.body.idade;
 				dados.descricao = req.body.descricao;
+				dados.pessoaid = req.body.pessoaid;
+				dadps.contato = req.body.contato;
 				dados.save(function(err){
 					if(err){
 						res.send(err)
