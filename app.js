@@ -38,6 +38,7 @@ router.route('/Pessoa')
 		var pessoas = new Pessoa();
 		pessoas.nomePessoa = req.body.nomePessoa;
 		pessoas.usuario = req.body.usuario;
+		pessoas.email = req.body.email;
 		pessoas.senha = req.body.senha;
 		pessoas.endereco = req.body.endereco;
 		pessoas.contato = req.body.contato;
@@ -66,6 +67,7 @@ router.route('/Pessoa/:id')
 			}
 				dados.nomePessoa = req.body.nomePessoa;
 				dados.usuario = req.body.usuario;
+				dados.email = req.body.email;
 				dados.senha = req.body.senha;
 				dados.endereco = req.body.endereco;
 				dados.contato = req.body.contato;
@@ -104,7 +106,7 @@ router.route('/Animal')
 		animais.raca = req.body.raca;
 		animais.idade = req.body.idade;
 		animais.descricao = req.body.descricao;
-		animais.pessoaid = req.body.pessoaid;
+		animais.idPessoa = req.body.idPessoa;
 		animais.contato = req.body.contato;
 		animais.save(function(err){
 			if(err){
@@ -133,7 +135,7 @@ router.route('/Animal')
 				dados.raca = req.body.raca;
 				dados.idade = req.body.idade;
 				dados.descricao = req.body.descricao;
-				dados.pessoaid = req.body.pessoaid;
+				dados.idPessoa = req.body.idPessoa;
 				dadps.contato = req.body.contato;
 				dados.save(function(err){
 					if(err){
